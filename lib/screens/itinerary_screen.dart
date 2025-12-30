@@ -260,8 +260,8 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                     _addPlaceToDay(day, place.id, place.name);
                                   },
                                   itemBuilder: (context) {
-                                    return trip.places.map((place) {
-                                      return PopupMenuItem(
+                                    return trip.places.map<PopupMenuEntry<String>>((place) {
+                                      return PopupMenuItem<String>(
                                         value: place.id,
                                         child: Text(place.name),
                                       );

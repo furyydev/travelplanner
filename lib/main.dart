@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
@@ -56,12 +55,12 @@ Future<void> main() async {
     print("Warning: .env file not found: $e");
   }
   
-  runApp(
-    DevicePreview(
-      builder: (context) => const MyApp(),
-    ),
-  );
-  // runApp(const MyApp());
+  // runApp(
+  //   DevicePreview(
+  //     builder: (context) => const MyApp(),
+  //   ),
+  // );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -84,7 +83,6 @@ class MyApp extends StatelessWidget {
           '/login': (context) => const LoginScreen(),
           '/home': (context) => const HomeScreen(),
         },
-        builder: DevicePreview.appBuilder,
       ),
     );
   }

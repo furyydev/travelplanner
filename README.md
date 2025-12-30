@@ -236,7 +236,7 @@ These keys are optional as the corresponding services are currently non-function
 
 The app starts with a clean login interface featuring the Smart Travel Planner branding.
 
-![Login Screen](screenshots/login_screen.png)
+<img src="screenshots/login_screen.png" alt="Login Screen" width="300">
 
 **Features:**
 - Simple username and password authentication
@@ -249,7 +249,7 @@ The app starts with a clean login interface featuring the Smart Travel Planner b
 
 The main screen provides quick access to search functionality and displays the current trip.
 
-![Home Screen](screenshots/home_screen.png)
+<img src="screenshots/home_screen.png" alt="Home Screen" width="300">
 
 **Features:**
 - Search bar for city names
@@ -265,7 +265,7 @@ View detailed information about a selected destination with beautiful imagery.
 
 #### Paris - Eiffel Tower
 
-![Paris Destination](screenshots/paris_detail.png)
+<img src="screenshots/paris_detail.png" alt="Paris Destination" width="300">
 
 **Features:**
 - High-quality destination images from Unsplash
@@ -275,7 +275,7 @@ View detailed information about a selected destination with beautiful imagery.
 
 #### Gwalior - Fort
 
-![Gwalior Destination](screenshots/gwalior_detail.png)
+<img src="screenshots/gwalior_detail.png" alt="Gwalior Destination" width="300">
 
 **Features:**
 - Displays destination images for any city worldwide
@@ -288,7 +288,7 @@ View detailed information about a selected destination with beautiful imagery.
 
 Manage all your saved travel plans in one place.
 
-![Saved Trips](screenshots/saved_trips.png)
+<img src="screenshots/saved_trips.png" alt="Saved Trips" width="300">
 
 **Features:**
 - List of all saved destinations

@@ -11,9 +11,9 @@ class SavedTripsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Saved Trips'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Saved Trips'),
+      // ),
       body: Consumer<TripProvider>(
         builder: (context, tripProvider, _) {
           final trips = tripProvider.savedTrips;

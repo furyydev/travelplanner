@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Smart Travel Planner'),
+        title: const Text('Smart Travel Planner', ),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),

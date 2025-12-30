@@ -25,8 +25,6 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<bool> login(String username, String password) async {
-    // Mock authentication - for MVP, accept any credentials
-    // In production, this would validate against a backend
     if (username.isNotEmpty && password.isNotEmpty) {
       _isLoggedIn = true;
       _username = username;

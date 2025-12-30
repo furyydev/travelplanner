@@ -1,11 +1,9 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ApiConstants {
-  // OpenTripMap API
   static const String openTripMapBaseUrl = 'https://api.opentripmap.com/0.1';
   static const String openTripMapLang = 'en';
   
-  // Cache API keys to avoid repeated dotenv access
   static String? _cachedOtmKey;
   static String? _cachedWeatherKey;
   static String? _cachedUnsplashKey;
@@ -21,7 +19,6 @@ class ApiConstants {
     return _cachedOtmKey!;
   }
 
-  // OpenWeatherMap API
   static const String weatherBaseUrl = 'https://api.openweathermap.org/data/2.5';
   static String get weatherApiKey {
     if (_cachedWeatherKey != null) return _cachedWeatherKey!;
@@ -33,7 +30,6 @@ class ApiConstants {
     return _cachedWeatherKey!;
   }
 
-  // Unsplash API
   static const String unsplashBaseUrl = 'https://api.unsplash.com';
   static String get unsplashApiKey {
     if (_cachedUnsplashKey != null) return _cachedUnsplashKey!;
@@ -55,7 +51,6 @@ class ApiConstants {
     return _cachedUnsplashAccessKey!;
   }
   
-  // Initialize API keys after dotenv loads
   static void initializeKeys() {
     try {
       _cachedOtmKey = dotenv.env['OPENTRIPMAP_API_KEY'] ?? 'YOUR_OPENTRIPMAP_API_KEY';

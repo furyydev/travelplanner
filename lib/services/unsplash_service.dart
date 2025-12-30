@@ -15,7 +15,6 @@ class UnsplashService {
       }
       return null;
     } catch (e) {
-      // Return null if API fails - app should still work
       return null;
     }
   }

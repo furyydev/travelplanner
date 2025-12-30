@@ -9,7 +9,6 @@ class StorageService {
       final prefs = await SharedPreferences.getInstance();
       final trips = await getSavedTrips();
       
-      // Check if trip already exists
       final index = trips.indexWhere((t) => t.id == trip.id);
       if (index != -1) {
         trips[index] = trip.copyWith(updatedAt: DateTime.now());

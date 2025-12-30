@@ -90,7 +90,6 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
     final existingItinerary = currentTrip.itinerary;
     final items = existingItinerary?.items ?? [];
     
-    // Find max order for this day
     final dayItems = items.where((item) => item.day == day).toList();
     final maxOrder = dayItems.isEmpty
         ? 0

@@ -44,10 +44,8 @@ class TripProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      // Get image first (works independently)
       final imageUrl = await _unsplashService.getDestinationImage(cityName);
 
-      // Try to get destination info from OpenTripMap (optional)
       Destination? destination;
       List<Place> places = [];
       Weather? weather;
@@ -55,15 +53,12 @@ class TripProvider with ChangeNotifier {
       try {
         destination = await _placeService.getDestinationByCity(cityName);
         
-        // Try to get places
         try {
           places = await _placeService.searchPlacesByCity(cityName);
         } catch (e) {
-          // Places are optional, continue without them
           print('Could not fetch places: $e');
         }
         
-        // Try to get weather if we have coordinates
         if (destination.latitude != 0.0 && destination.longitude != 0.0) {
           try {
             weather = await _weatherService.getWeatherByCoordinates(
@@ -71,12 +66,10 @@ class TripProvider with ChangeNotifier {
               destination.longitude,
             );
           } catch (e) {
-            // Weather is optional
             print('Could not fetch weather: $e');
           }
         }
       } catch (e) {
-        // OpenTripMap failed, create default destination
         print('OpenTripMap unavailable, using default destination: $e');
         destination = Destination(
           name: cityName,
@@ -85,7 +78,6 @@ class TripProvider with ChangeNotifier {
         );
       }
 
-      // Create new trip (works even if OpenTripMap fails)
       _currentTrip = Trip(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         name: cityName,

@@ -11,7 +11,6 @@ import 'screens/home_screen.dart';
 import 'utils/theme.dart';
 import 'utils/constants.dart';
 
-// #region agent log
 Future<void> _debugLog({
   required String hypothesisId,
   required String location,
@@ -28,16 +27,13 @@ Future<void> _debugLog({
     'data': data,
     'timestamp': DateTime.now().millisecondsSinceEpoch,
   };
-  // Use print for logging (works on all platforms)
   print('DEBUG: ${jsonEncode(payload)}');
 }
-// #endregion
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     await dotenv.load(fileName: ".env");
-    // Initialize API keys after successful load
     ApiConstants.initializeKeys();
     await _debugLog(
       hypothesisId: 'H1',
@@ -56,7 +52,6 @@ Future<void> main() async {
       message: '.env load failed',
       data: {'error': e.toString(), 'errorType': e.runtimeType.toString()},
     );
-    // Initialize with defaults if load fails
     ApiConstants.initializeKeys();
     print("Warning: .env file not found: $e");
   }

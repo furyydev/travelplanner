@@ -5,7 +5,6 @@ import 'api_service.dart';
 import 'dart:convert';
 
 class OpenTripMapService {
-  // #region agent log
   Future<void> _debugLog({
     required String hypothesisId,
     required String location,
@@ -22,12 +21,9 @@ class OpenTripMapService {
       'data': data,
       'timestamp': DateTime.now().millisecondsSinceEpoch,
     };
-    // Use print for logging (works on all platforms)
     print('DEBUG: ${jsonEncode(payload)}');
   }
-  // #endregion
 
-  // Get destination info by city name using /{lang}/places/geoname
   Future<Destination> getDestinationByCity(String cityName, {String? countryParam}) async {
     try {
       final apiKey = ApiConstants.openTripMapApiKey;
@@ -36,7 +32,6 @@ class OpenTripMapService {
         throw Exception('OpenTripMap API key not configured. Please set OPENTRIPMAP_API_KEY in .env file');
       }
       
-      // URL encode city name and country to handle spaces and special characters
       final encodedCityName = Uri.encodeComponent(cityName);
       var geocodeUrl =
           '${ApiConstants.openTripMapBaseUrl}/${ApiConstants.openTripMapLang}/places/geoname?name=$encodedCityName&apikey=$apiKey';
@@ -60,7 +55,6 @@ class OpenTripMapService {
       
       final data = await ApiService.get(geocodeUrl);
       
-      // Log raw response to debug
       await _debugLog(
         hypothesisId: 'H1',
         location: 'open_trip_map_service.dart:67',
@@ -71,7 +65,6 @@ class OpenTripMapService {
         },
       );
       
-      // OpenTripMap geoname API returns: {name, lat, lon, country, country_code, state, ...}
       final name = data['name'] as String?;
       final lat = data['lat'];
       final lon = data['lon'];
@@ -91,7 +84,6 @@ class OpenTripMapService {
         },
       );
       
-      // Validate response has coordinates
       if (lat == null || lon == null) {
         throw Exception('API returned invalid coordinates. Response: ${data.toString()}');
       }
@@ -114,26 +106,22 @@ class OpenTripMapService {
     }
   }
 
-  // Search for places by city name using /{lang}/places/radius
   Future<List<Place>> searchPlacesByCity(String cityName, {String? countryParam}) async {
     try {
-      // First, get geocode for the city
       final destination = await getDestinationByCity(cityName, countryParam: countryParam);
       final lat = destination.latitude;
       final lon = destination.longitude;
 
-      // Validate coordinates
       if (lat == 0.0 && lon == 0.0) {
         throw Exception('Invalid coordinates for city: $cityName');
       }
 
-      // Search for tourist places near the city using /{lang}/places/radius
       final apiKey = ApiConstants.openTripMapApiKey;
       if (apiKey.contains('YOUR_') || apiKey.isEmpty) {
         throw Exception('OpenTripMap API key not configured');
       }
       
-      final radius = 5000; // 5km radius in meters
+      final radius = 5000;
       final placesUrl =
           '${ApiConstants.openTripMapBaseUrl}/${ApiConstants.openTripMapLang}/places/radius?radius=$radius&lon=$lon&lat=$lat&kinds=tourist_attraction&limit=20&apikey=$apiKey';
 
@@ -152,7 +140,6 @@ class OpenTripMapService {
         },
       );
 
-      // Get detailed info for each place using /{lang}/places/xid/{xid}
       final places = <Place>[];
       for (var feature in features) {
         final xid = feature['properties']?['xid'];
@@ -164,7 +151,6 @@ class OpenTripMapService {
             final placeDetail = await ApiService.get(detailUrl);
             places.add(Place.fromJson(placeDetail));
           } catch (e) {
-            // If detail fetch fails, use basic info from GeoJSON feature
             final props = feature['properties'] ?? {};
             final coords = feature['geometry']?['coordinates'] ?? [];
             places.add(Place(
@@ -183,7 +169,6 @@ class OpenTripMapService {
     }
   }
 
-  // Auto-suggest places using /{lang}/places/autosuggest
   Future<List<Place>> autosuggestPlaces(String query) async {
     try {
       final apiKey = ApiConstants.openTripMapApiKey;

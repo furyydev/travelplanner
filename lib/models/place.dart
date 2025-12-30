@@ -22,11 +22,9 @@ class Place {
   });
 
   factory Place.fromJson(Map<String, dynamic> json) {
-    // Handle both GeoJSON feature format and direct object format
     final isGeoJson = json['geometry'] != null;
     final properties = isGeoJson ? json['properties'] ?? {} : json;
     
-    // Extract coordinates from GeoJSON or point object
     double lat = 0.0;
     double lon = 0.0;
     if (isGeoJson && json['geometry']?['coordinates'] != null) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import 'home_screen.dart';
@@ -50,6 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -117,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 16),
                   Text(
                     'Note: This is a demo app. Any credentials will work.',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 12,
                       color: Colors.grey[600],
                     ),
@@ -132,5 +134,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
 
 

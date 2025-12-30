@@ -56,12 +56,12 @@ Future<void> main() async {
     print("Warning: .env file not found: $e");
   }
   
-  // runApp(
-  //   DevicePreview(
-  //     builder: (context) => const MyApp(),
-  //   ),
-  // );
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      builder: (context) => const MyApp(),
+    ),
+  );
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

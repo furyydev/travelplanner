@@ -6,6 +6,7 @@ import '../providers/trip_provider.dart';
 import '../widgets/search_bar.dart';
 import 'place_list_screen.dart';
 import 'saved_trips_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,9 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (mounted) {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (_) => const PlaceListScreen(),
-            ),
+            MaterialPageRoute(builder: (_) => const PlaceListScreen()),
           );
         }
       });
@@ -44,7 +43,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Smart Travel Planner', ),
+        title: Text(
+          'Smart Travel Planner',
+          style: GoogleFonts.poppins(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        // elevation: 0,
+        // backgroundColor: Colors.amber[100],
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -60,10 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
             icon: Icon(Icons.bookmark),
             label: 'Saved Trips',
@@ -79,13 +83,14 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(height: 20),
-          const Text(
+          const SizedBox(height: 10),
+          Text(
             'Where do you want to go?',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.poppins(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
+            // textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
           SearchBarWidget(
@@ -113,14 +118,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Quick Actions',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 10),
         Row(
           children: [
             Expanded(
@@ -191,7 +193,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             if (trip.imageUrl != null)
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
                 child: CachedNetworkImage(
                   imageUrl: trip.imageUrl!,
                   height: 200,
@@ -235,7 +239,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? '${trip.places.length} places found'
                         : 'Image loaded - Places unavailable',
                     style: TextStyle(
-                      color: trip.places.isEmpty ? Colors.orange : Colors.grey[600],
+                      color: trip.places.isEmpty
+                          ? Colors.orange
+                          : Colors.grey[600],
                     ),
                   ),
                 ],
@@ -247,4 +253,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
